@@ -1,0 +1,22 @@
+{
+  "name": "portoku-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REST API portofolio Bima Abiyasa (Express + SQLite)",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "db:seed": "node src/seed.js",
+    "db:reset": "node src/seed.js --reset",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}

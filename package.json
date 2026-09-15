@@ -1,0 +1,24 @@
+{
+  "name": "portoku",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portofolio full stack Bima Abiyasa — client statis (GitHub Pages) + REST API Node/Express",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "install:all": "npm install && npm --prefix server install",
+    "dev": "node server/src/index.js",
+    "dev:client": "node scripts/serve-client.js",
+    "start": "node server/src/index.js",
+    "db:seed": "node server/src/seed.js",
+    "db:reset": "node server/src/seed.js --reset",
+    "build": "node scripts/build-pages.js",
+    "test": "node --test server/test/*.test.js",
+    "preview": "npm run build && node scripts/serve-client.js --dir dist"
+  },
+  "workspaces": [
+    "server"
+  ]
+}

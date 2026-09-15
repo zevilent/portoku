@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+server/node_modules/
+
+# database lokal (dibuat otomatis oleh seed)
+server/data/*.db
+server/data/*.db-journal
+server/data/*.db-wal
+server/data/*.db-shm
+server/data/*.sqlite
+
+# hasil build untuk GitHub Pages
+dist/
+
+# log & file OS
+*.log
+npm-debug.log*
+.DS_Store
+.env
+.env.local
+
+# editor
+.vscode/
+.idea/
+
+# berkas kerja agen/perkakas lokal
+.reasonix/

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BIMA ABIYASA® — Full Stack Web Developer</title>
+<meta name="description" content="Portofolio Bima Abiyasa — Full Stack Web Developer dari Bogor, Indonesia. Membangun website & aplikasi web dari nol hingga live."/>
+<meta name="author" content="Bima Abiyasa"/>
+<meta name="theme-color" content="#0a0a09"/>
+<link rel="canonical" href="https://zevilent.github.io/portoku/"/>
+
+<!-- Open Graph / sosial -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="BIMA ABIYASA® — Full Stack Web Developer"/>
+<meta property="og:description" content="Portofolio interaktif: web app, landing page, dan backend API. Bogor, Indonesia."/>
+<meta property="og:image" content="https://picsum.photos/seed/bima-og/1200/630.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<!-- ikon sederhana (SVG inline, tanpa file tambahan) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a09'/><circle cx='16' cy='16' r='8' fill='%23c9ff2e'/></svg>"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"/>
+<noscript><style>
+.sec-inner,.ht-inner{transform:none}.rv,.hero-top,.hero-sub,.hero-bar,.nav,.hud{opacity:1;transform:none}.statement .aw{opacity:1}.term-input-row{display:flex}.faq-a{height:auto}
+</style></noscript>
+</head>
+<body>
+
+<!-- lapisan global -->
+<div class="grid-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="noise" aria-hidden="true"></div>
+<canvas id="matrixFx" aria-hidden="true"></canvas>
+<div id="pbar" aria-hidden="true"><i></i></div>
+<div class="cur-dot" aria-hidden="true"></div>
+<div class="cur-ring" aria-hidden="true"><span id="curLabel">LIHAT</span></div>
+<div class="data-badge" id="dataBadge" aria-hidden="true">SUMBER DATA: <b id="dataBadgeSrc">MEMUAT…</b></div>
+
+<!-- dot nav -->
+<nav class="dotnav" aria-label="Navigasi bagian">
+  <a href="#hero" data-scroll data-label="BERANDA"><i></i></a>
+  <a href="#tentang" data-scroll data-label="TENTANG"><i></i></a>
+  <a href="#karya" data-scroll data-label="KARYA"><i></i></a>
+  <a href="#teknologi" data-scroll data-label="TEKNOLOGI"><i></i></a>
+  <a href="#layanan" data-scroll data-label="LAYANAN"><i></i></a>
+  <a href="#kontak" data-scroll data-label="KONTAK"><i></i></a>
+</nav>
+
+<!-- preloader -->
+<div id="preloader" aria-hidden="true">
+  <div id="preTop"><span>BIMA ABIYASA® — PORTOFOLIO</span><span>VER 2.2 / BOGOR, ID</span></div>
+  <div id="preCount">000<em>%</em></div>
+  <div id="preLog">INISIALISASI SISTEM…</div>
+  <div id="preBar"><i></i></div>
+</div>
+
+<!-- navigasi -->
+<header class="nav">
+  <a class="logo" href="#hero" data-scroll>BIMA<b>—</b>A<i></i></a>
+  <nav class="nav-links">
+    <a href="#tentang" data-scroll>TENTANG</a>
+    <a href="#karya" data-scroll>KARYA</a>
+    <a href="#layanan" data-scroll>LAYANAN</a>
+    <a href="#faq" data-scroll>FAQ</a>
+  </nav>
+  <div class="nav-right">
+    <span class="nav-clock">WIB <span id="clock">--:--:--</span></span>
+    <a class="nav-cta mag" id="navCta" href="https://wa.me/6285155402545?text=Hai%20Bima%2C%20saya%20tertarik%20diskusi%20proyek%20web!" target="_blank" rel="noopener">MULAI PROYEK</a>
+    <button class="burger" id="menuBtn" aria-label="Menu"><span class="b1"></span><span class="b2"></span></button>
+  </div>
+</header>
+
+<!-- menu fullscreen -->
+<div id="menuOverlay">
+  <div class="m-links">
+    <div class="m-link"><a href="#tentang" data-scroll><span class="mi">01</span>TENTANG<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+    <div class="m-link"><a href="#karya" data-scroll><span class="mi">02</span>KARYA<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+    <div class="m-link"><a href="#teknologi" data-scroll><span class="mi">03</span>TEKNOLOGI<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+    <div class="m-link"><a href="#proses" data-scroll><span class="mi">04</span>PROSES<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+    <div class="m-link"><a href="#layanan" data-scroll><span class="mi">05</span>LAYANAN<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+    <div class="m-link"><a href="#faq" data-scroll><span class="mi">06</span>FAQ<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+    <div class="m-link"><a href="#kontak" data-scroll><span class="mi">07</span>KONTAK<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+  </div>
+  <div class="m-foot"><span>WA +62 851-5540-2545 — @zevilents.ventus</span><span>BOGOR, INDONESIA — 6.5950° S / 106.8166° E</span></div>
+</div>
+
+<main>
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <canvas id="heroCanvas" data-cursor="SERET"></canvas>
+  <div class="hud hero-fade"><span id="hudName">OBJ.01 — TORUS KNOT</span><div class="hud-dots" id="hudDots"></div></div>
+  <div class="hero-content wrap">
+    <div class="hero-top hero-fade">
+      <span>©2025 — PORTOFOLIO INTERAKTIF</span>
+      <span data-content="profile.shortRole">FULL STACK WEB DEVELOPER — BOGOR, ID</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="ht-line"><span class="ht-inner">BIMA<span class="ht-chip"><img src="https://picsum.photos/seed/bima-chip/480/180.jpg" alt=""></span>ABIYASA<svg class="ht-ast" viewBox="0 0 100 100" fill="currentColor"><path d="M50 2 59 36 88 16 66 46 98 50 66 54 88 84 59 64 50 98 41 64 12 84 34 54 2 50 34 46 12 16 41 36Z"/></svg></span></span>
+      <span class="ht-line"><span class="ht-inner outline glitch" data-text="DEVELOPER">DEVELOPER</span></span>
+    </h1>
+    <div class="hero-sub hero-fade">
+      <div>
+        <p class="hero-p">Full Stack Web Developer dari Bogor, Indonesia. Membangun website &amp; aplikasi web dari nol hingga live — dan siap mengerjakan proyek Anda berikutnya.</p>
+        <p class="hero-drag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v16h16"/><path d="m5 19 6-6"/><path d="m2 6 3-3 3 3"/><path d="m18 16 3 3-3 3"/></svg>SERET UNTUK MEMUTAR — KLIK UNTUK GANTI BENTUK</p>
+      </div>
+      <div class="badge">
+        <svg class="ring" viewBox="0 0 100 100"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <text><textPath href="#circ">GULIR KE BAWAH • JELAJAHI • GULIR KE BAWAH • JELAJAHI • </textPath></text></svg>
+        <span class="bc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bar hero-fade">
+    <span><i class="dot-live"></i><span data-content="profile.availabilityNote">TERSEDIA UNTUK PROYEK — HUBUNGI VIA WHATSAPP</span></span>
+    <span data-content="profile.coords">6.5950° S / 106.8166° E</span>
+  </div>
+</section>
+
+<!-- marquee ganda (CSS murni) -->
+<div class="mqs" aria-hidden="true">
+  <div class="mq ghost"><div class="mq-track"><div class="mq-half" id="gh1"></div><div class="mq-half"></div></div></div>
+  <div class="mq lime"><div class="mq-track"><div class="mq-half" id="lm1"></div><div class="mq-half"></div></div></div>
+</div>
+
+<!-- ================= TENTANG ================= -->
+<section id="tentang">
+  <div class="wrap">
+    <p class="sec-label rv">( 01 ) — TENTANG SAYA</p>
+    <h2 class="sec-title" style="margin-bottom:clamp(2.5rem,5vw,4.5rem)">
+      <span class="sec-line"><span class="sec-inner">MANUSIA DI</span></span>
+      <span class="sec-line"><span class="sec-inner outline">BALIK KODE</span></span>
+    </h2>
+    <div class="about-grid">
+      <figure class="pt-frame rv">
+        <span class="cor tl"></span><span class="cor tr"></span><span class="cor bl"></span><span class="cor br"></span>
+        <img src="https://picsum.photos/seed/bima-portrait/640/800.jpg" alt="Potret Bima Abiyasa">
+        <figcaption class="pt-cap"><span>BIMA ABIYASA</span><span>FIG. 01 — BGR/ID</span></figcaption>
+      </figure>
+      <p class="statement" id="aboutText"></p>
+    </div>
+    <div class="stats rv" id="statsWrap"></div>
+  </div>
+</section>
+
+<!-- ================= TERMINAL ================= -->
+<section id="terminal">
+  <div class="wrap">
+    <p class="sec-label rv">( 02 ) — TERMINAL</p>
+    <h2 class="sec-title rv" style="margin-bottom:1rem">TERMINAL<span class="caret"></span></h2>
+    <p class="rv" style="font:500 .72rem var(--fm);letter-spacing:.14em;color:var(--mut);margin-bottom:2.5rem">// BUKAN HIASAN — TERMINAL INI BENAR-BENAR BISA DIKETIK. COBA KETIK "MATRIX"…</p>
+    <div class="term rv" id="term">
+      <div class="term-bar">
+        <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+        <span class="term-title">bima@zevilent: ~/terminal — zsh</span>
+        <span class="term-hint">INTERAKTIF</span>
+      </div>
+      <div class="term-body" id="termBody">
+        <div id="termOut"></div>
+        <div class="term-input-row" id="termInputRow">
+          <span class="t-prompt">bima@web:~$</span><span style="min-width:2px"></span><span id="termTyped"></span><span class="t-caret"></span>
+          <input id="termInput" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Input terminal">
+        </div>
+      </div>
+      <div class="term-status"><span>ZSH — BIMAPORT v2.2</span><span>KETIK "help" LALU ENTER</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KARYA ================= -->
+<section id="karya">
+  <div class="wrap">
+    <p class="sec-label rv">( 03 ) — PORTOFOLIO</p>
+    <h2 class="sec-title" style="margin-bottom:clamp(2rem,4vw,3.5rem)">
+      <span class="sec-line"><span class="sec-inner">KARYA TERPILIH <span class="sup" id="projectCount">(04)</span></span></span>
+    </h2>
+    <div class="work-list" id="workList"></div>
+  </div>
+</section>
+
+<!-- ================= TEKNOLOGI ================= -->
+<section id="teknologi">
+  <div class="wrap">
+    <p class="sec-label rv">( 04 ) — STACK &amp; TOOLS</p>
+    <h2 class="sec-title" style="margin-bottom:clamp(2.5rem,5vw,4rem)">
+      <span class="sec-line"><span class="sec-inner">TEKNOLOGI</span></span>
+      <span class="sec-line"><span class="sec-inner outline">YANG SAYA GUNAKAN</span></span>
+    </h2>
+    <div id="tgWrap"></div>
+  </div>
+</section>
+
+<!-- ================= PROSES ================= -->
+<section id="proses">
+  <div class="wrap proses-grid">
+    <div class="pr-left">
+      <p class="sec-label rv">( 05 ) — PROSES</p>
+      <h2 class="sec-title">
+        <span class="sec-line"><span class="sec-inner">CARA SAYA</span></span>
+        <span class="sec-line"><span class="sec-inner outline">BEKERJA</span></span>
+      </h2>
+      <p class="pr-note rv">Empat tahap yang sama sekali tidak gasal-pakai-slasal. Setiap langkah transparan — kamu selalu tahu proyekmu sedang di mana.</p>
+    </div>
+    <div class="pr-steps" id="prSteps">
+      <div class="pr-line" aria-hidden="true"><i id="prFill"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LAYANAN ================= -->
+<section id="layanan">
+  <div class="wrap">
+    <p class="sec-label rv">( 06 ) — LAYANAN</p>
+    <h2 class="sec-title" style="margin-bottom:clamp(2.5rem,5vw,4rem)">
+      <span class="sec-line"><span class="sec-inner">YANG BISA SAYA</span></span>
+      <span class="sec-line"><span class="sec-inner outline">KERJAKAN UNTUKMU</span></span>
+    </h2>
+    <div id="svWrap"></div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <p class="sec-label rv" style="text-align:center">( 07 ) — FAQ</p>
+    <h2 class="sec-title" style="text-align:center;margin-bottom:clamp(2.5rem,5vw,4rem)">
+      <span class="sec-line"><span class="sec-inner">PERTANYAAN</span></span>
+      <span class="sec-line"><span class="sec-inner outline">YANG SERING DITANYA</span></span>
+    </h2>
+    <div class="faq-wrap" id="faqWrap"></div>
+  </div>
+</section>
+
+<!-- ================= KONTAK ================= -->
+<section id="kontak">
+  <div class="wrap">
+    <p class="sec-label rv">( 08 ) — KONTAK</p>
+    <h2 class="c-title">
+      <span class="sec-line"><span class="sec-inner">PUNYA PROYEK</span></span>
+      <span class="sec-line"><span class="sec-inner outline">MARI NGOBROL<span class="dot-org">.</span></span></span>
+    </h2>
+    <div class="c-row rv">
+      <p class="c-note">Saya siap mulai dari landing page sederhana sampai aplikasi web lengkap. Ceritakan ide Anda lewat WhatsApp — biasanya saya balas dalam hitungan jam, bukan hari.</p>
+      <a class="c-btn mag" id="contactCta" href="https://wa.me/6285155402545?text=Hai%20Bima%2C%20saya%20punya%20ide%20proyek%20web%20dan%20ingin%20diskusi!" target="_blank" rel="noopener" data-cursor="CHAT"><span>MULAI<br>PROYEK</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+    </div>
+
+    <!-- form kontak → POST /api/contact -->
+    <div class="form-wrap rv">
+      <p class="sec-label" style="margin-bottom:1.4rem">( 08.1 ) — ATAU KIRIM PESAN LANGSUNG</p>
+      <form id="contactForm" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="cName">NAMA</label>
+            <input id="cName" name="name" type="text" placeholder="Nama kamu" required minlength="2" maxlength="120"/>
+          </div>
+          <div class="form-field">
+            <label for="cEmail">EMAIL</label>
+            <input id="cEmail" name="email" type="email" placeholder="nama@email.com" required maxlength="160"/>
+          </div>
+          <div class="form-field wide">
+            <label for="cSubject">SUBJEK</label>
+            <input id="cSubject" name="subject" type="text" placeholder="Landing page / web app / lainnya" maxlength="160"/>
+          </div>
+          <div class="form-field wide">
+            <label for="cMessage">PESAN</label>
+            <textarea id="cMessage" name="message" placeholder="Ceritakan singkat proyek impianmu…" required minlength="10" maxlength="4000"></textarea>
+          </div>
+        </div>
+        <!-- jebakan bot (tidak terlihat manusia) -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="cWebsite">Website</label>
+          <input id="cWebsite" name="website" type="text" tabindex="-1" autocomplete="off"/>
+        </div>
+        <div class="form-actions">
+          <button class="form-submit mag" type="submit" id="formSubmit">KIRIM PESAN</button>
+          <p class="form-note">Pesan tersimpan di database server (<span class="mono">POST /api/contact</span>). Kalau backend belum aktif, saya tetap bisa dihubungi lewat WhatsApp.</p>
+        </div>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="c-links rv">
+      <button class="c-mail" id="copyPhone" data-cursor="SALIN">+62 851-5540-2545<span class="copy-hint">— KLIK UNTUK MENYALIN NOMOR</span></button>
+      <div class="socials">
+        <a id="waLink" href="https://wa.me/6285155402545" target="_blank" rel="noopener">WHATSAPP<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        <a id="igLink" href="https://instagram.com/zevilents.ventus" target="_blank" rel="noopener">INSTAGRAM<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        <a id="ghLink" href="https://github.com/zevilent" target="_blank" rel="noopener">GITHUB<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="foot-row wrap">
+      <span data-content="profile.copyright">© 2025 BIMA ABIYASA — SEMUA HAK DILINDUNGI</span>
+      <span>DIBANGUN DARI NOL — BOGOR, INDONESIA</span>
+      <button id="toTop" class="mag">KEMBALI KE ATAS<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></button>
+    </div>
+    <div class="foot-mq" aria-hidden="true">
+      <div class="mq"><div class="mq-track"><div class="mq-half" id="fm1"></div><div class="mq-half"></div></div></div>
+    </div>
+  </footer>
+</section>
+</main>
+
+<!-- pratinjau mengambang proyek -->
+<div class="work-preview" id="workPreview">
+  <div class="shot">
+    <div class="shot-bar"><i></i><i></i><i></i><span id="prevUrl">—</span></div>
+    <div class="shot-img"><img id="prevImg" alt="Pratinjau proyek"></div>
+  </div>
+</div>
+
+<!-- modal detail proyek -->
+<div id="modal" role="dialog" aria-modal="true">
+  <div class="m-overlay" id="mOverlay"></div>
+  <div class="m-panel" id="mPanel">
+    <div class="m-img">
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span id="mUrl">—</span></div>
+        <div class="shot-img"><img id="mImg" alt="Pratinjau proyek"></div>
+      </div>
+    </div>
+    <div class="m-body">
+      <div class="m-meta"><span id="mIdx">01 / 04</span><span id="mYear">2024</span></div>
+      <h3 id="mTitle">—</h3>
+      <p class="m-desc" id="mDesc"></p>
+      <p class="m-sub">SOROTAN PROYEK</p>
+      <ul class="m-pts" id="mPts"></ul>
+      <p class="m-sub">TEKNOLOGI / TAG</p>
+      <div class="m-stack" id="mStack"></div>
+      <a class="m-live" id="mLink" href="#" target="_blank" rel="noopener">KUNJUNGI SITUS LIVE<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      <div class="m-nav">
+        <button id="mPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>SEBELUMNYA</button>
+        <button id="mNext">BERIKUTNYA<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <button class="m-close" id="mClose" aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+</div>
+
+<!-- toast -->
+<div id="toast" role="status"></div>
+
+<!-- urutan penting: config → data statis → jembatan API → aplikasi -->
+<script src="config.js"></script>
+<script src="js/data.fallback.js"></script>
+<script src="js/api.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
