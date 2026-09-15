@@ -42,6 +42,19 @@ Buka <http://localhost:3000>. Backend dan situs dilayani dari origin yang sama, 
 | `npm test` | Jalankan test API (`node --test`) |
 | `npm run build` | Hasilkan `dist/` untuk GitHub Pages |
 | `npm run preview` | Build lalu pratinjau `dist/` di port 4173 |
+| `npm run check:clipping` | Periksa teks terpotong di 11 ukuran layar (butuh Playwright) |
+
+### Memeriksa tampilan di berbagai ukuran layar
+
+```bash
+npm install --no-save playwright-core   # hanya untuk pemeriksaan ini
+npm run preview                         # jalankan di terminal terpisah
+npm run check:clipping http://localhost:4173/
+```
+
+Skrip memakai Chrome untuk membuka halaman di 11 ukuran viewport (320px–1920px) dan melaporkan
+teks yang meluber keluar kotaknya. Keluar dengan kode `1` bila ada masalah, jadi cocok dipakai
+di CI. Elemen yang memang dirancang meluber (marquee berjalan, teks melingkar SVG) diabaikan.
 
 ---
 

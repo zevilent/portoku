@@ -15,6 +15,7 @@
     "db:seed": "node server/src/seed.js",
     "db:reset": "node server/src/seed.js --reset",
     "build": "node scripts/build-pages.js",
+    "check:clipping": "node scripts/check-clipping.mjs",
     "test": "node --test server/test/*.test.js",
     "preview": "npm run build && node scripts/serve-client.js --dir dist"
   },
