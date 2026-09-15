@@ -111,7 +111,6 @@ body.menu-open .burger .b2{transform:translateY(-4px) rotate(-45deg)}
 /* panah hanya ditampilkan saat menu benar-benar terbuka,
    supaya menu tersembunyi tidak menambah lebar dokumen di layar sempit */
 body.menu-open .m-link svg{display:block}
-.m-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font:500 .7rem var(--fm);letter-spacing:.14em}
 
 /* ================= HERO ================= */
 #hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;

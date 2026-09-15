@@ -95,8 +95,10 @@ api.post('/contact', (req, res) => {
   if (!isEmail(email)) return bad(res, 'Alamat email tidak valid.');
   if (message.length < 10) return bad(res, 'Pesan minimal 10 karakter.');
 
-  /* req.ip sudah memperhitungkan trust proxy, jadi tidak bisa dipalsukan
-     dengan mengubah header X-Forwarded-For sendiri. */
+  /* Pembatas laju dihitung per klien memakai req.ip (bukan membaca header
+     X-Forwarded-For sendiri, yang bisa dipalsukan penyerang).
+     Catatan: req.ip hanya benar-benar tepercaya bila nilai `trust proxy`
+     di app.js sesuai dengan jumlah proxy di depan server. */
   const ip = req.ip || req.socket?.remoteAddress || 'unknown';
   if (rateLimited(ip)) {
     return bad(res, 'Terlalu banyak pesan dikirim. Coba lagi beberapa menit lagi.', 429);

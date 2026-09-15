@@ -118,7 +118,8 @@ GitHub Pages tidak bisa menjalankan server. Kalau ingin API ikut online:
 1. Deploy folder `server/` ke Railway / Render / VPS. Environment yang didukung:
    - `PORT` — port server (default `3000`),
    - `DB_PATH` — lokasi file SQLite (arahkan ke volume persist agar data pesan tidak hilang),
-   - `ADMIN_KEY` — kunci untuk endpoint `/api/messages`,
+   - `ADMIN_KEY` — kunci untuk endpoint `/api/messages` (tanpa ini endpoint **ditutup**, 403),
+   - `TRUST_PROXY` — jumlah proxy di depan server (default `1`, cocok untuk Railway/Render; set `0` bila diakses langsung),
    - `SERVE_CLIENT=false` — matikan penyajian file statis bila frontend sudah di Pages.
 2. Setelah backend punya URL publik, isi `API_BASE` di `client/config.js`:
 

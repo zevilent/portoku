@@ -17,7 +17,10 @@ export function createApp({ serveClient = true } = {}) {
   const app = express();
 
   app.disable('x-powered-by');
-  app.set('trust proxy', 1);
+  /* Angka ini harus sesuai jumlah proxy di depan server. Di Railway/Render
+     (satu proxy) nilai 1 sudah tepat; bila diakses langsung tanpa proxy,
+     set TRUST_PROXY=0 agar header X-Forwarded-For dari klien diabaikan. */
+  app.set('trust proxy', Number(process.env.TRUST_PROXY ?? 1));
 
   /* CORS terbuka: konten ini publik dan aman dibaca siapa pun,
      termasuk dari GitHub Pages (zevilent.github.io). */
