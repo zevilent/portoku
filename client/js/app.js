@@ -47,13 +47,18 @@
      mengecil tepat secukupnya. Semua baris dalam satu judul disamakan
      ukurannya, lalu diulang saat resize / font selesai dimuat. */
   function fitTitles() {
+    /* nowrap boleh memaksa judul jadi satu baris; di layar sempit itu
+       membuat halaman melebar, jadi pemaksaan hanya dilakukan bila
+       judulnya masih masuk akal untuk ditampilkan sebaris. */
+    const allowNowrap = innerWidth >= 640;
     $$('.hero-title,.sec-title,.c-title').forEach((t) => {
       const lines = [...t.querySelectorAll('.ht-inner,.sec-inner')];
       if (!lines.length) return;
       lines.forEach((l) => {
         l.style.fontSize = '';
-        l.style.whiteSpace = 'nowrap';
+        l.style.whiteSpace = allowNowrap ? 'nowrap' : '';
       });
+      if (!allowNowrap) return;
       let ratio = 1;
       lines.forEach((l) => {
         const box = l.parentElement.clientWidth;
