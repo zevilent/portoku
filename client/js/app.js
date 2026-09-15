@@ -47,29 +47,78 @@
      mengecil tepat secukupnya. Semua baris dalam satu judul disamakan
      ukurannya, lalu diulang saat resize / font selesai dimuat. */
   function fitTitles() {
-    /* nowrap boleh memaksa judul jadi satu baris; di layar sempit itu
-       membuat halaman melebar, jadi pemaksaan hanya dilakukan bila
-       judulnya masih masuk akal untuk ditampilkan sebaris. */
-    const allowNowrap = innerWidth >= 640;
+    /* Setiap baris judul dulu dipaksa satu baris (nowrap) lalu diperkecil
+       secukupnya agar pas di wadahnya. Perkecilan dijalankan di SEMUA lebar
+       layar — sebelumnya hanya saat nowrap diizinkan, sehingga di ponsel
+       judul meluber jauh keluar layar dan teksnya tampak terpotong. */
     $$('.hero-title,.sec-title,.c-title').forEach((t) => {
       const lines = [...t.querySelectorAll('.ht-inner,.sec-inner')];
       if (!lines.length) return;
+
       lines.forEach((l) => {
         l.style.fontSize = '';
-        l.style.whiteSpace = allowNowrap ? 'nowrap' : '';
+        l.style.whiteSpace = 'nowrap';
       });
-      if (!allowNowrap) return;
+
       let ratio = 1;
       lines.forEach((l) => {
         const box = l.parentElement.clientWidth;
         const w = l.scrollWidth;
         if (box > 0 && w > box) ratio = Math.min(ratio, box / w);
       });
-      if (ratio < 1) {
-        const pct = ratio * 0.985; /* margin aman 1,5% */
+
+      /* Batas bawah agar judul tidak pernah mengecil sampai tak terbaca:
+         kalau masih meluber setelah batas ini, biarkan judul membungkus
+         ke baris berikutnya sebagai jalan terakhir. */
+      const floor = 20;
+      lines.forEach((l) => {
+        const cur = parseFloat(getComputedStyle(l).fontSize) || 16;
+        if (ratio >= 1) return;
+        const next = cur * ratio * 0.985; /* margin aman 1,5% */
+        l.style.fontSize = Math.max(floor, next).toFixed(2) + 'px';
+      });
+
+      /* Khusus judul hero di layar sempit: dua baris besar jauh lebih
+         enak dibaca daripada satu baris yang dikecilkan ekstrem.
+         "BIMAABIYASA" adalah satu kata utuh, jadi pembungkusan biasa
+         tidak menolong — perlu titik putus buatan di antara nama. */
+      if (innerWidth < 640 && t.classList.contains('hero-title')) {
+        [lines[1], lines[2]].forEach((l) => l?.querySelector('.ht-ast')?.remove());
+        const first = lines[0];
+        const chip = first.querySelector('.ht-chip');
+        if (first && chip && !first.querySelector('[data-break]')) {
+          const br = document.createElement('span');
+          br.setAttribute('data-break', '');
+          br.style.cssText = 'flex-basis:100%;height:0';
+          chip.before(br);
+        }
         lines.forEach((l) => {
-          const cur = parseFloat(getComputedStyle(l).fontSize);
-          l.style.fontSize = (cur * pct).toFixed(2) + 'px';
+          l.style.whiteSpace = 'normal';
+          l.style.fontSize = '';
+          l.style.flexWrap = 'wrap';
+          l.style.justifyContent = 'flex-start';
+        });
+        /* ukur ulang setelah susunan baris berubah */
+        let ratio2 = 1;
+        lines.forEach((l) => {
+          const box = l.parentElement.clientWidth;
+          if (box > 0 && l.scrollWidth > box) ratio2 = Math.min(ratio2, box / l.scrollWidth);
+        });
+        if (ratio2 < 1) {
+          lines.forEach((l) => {
+            const cur = parseFloat(getComputedStyle(l).fontSize) || 16;
+            l.style.fontSize = Math.max(20, cur * ratio2 * 0.98).toFixed(2) + 'px';
+          });
+        }
+      }
+
+      /* Verifikasi hasil nyata: kalau masih ada yang meluber, lepaskan
+         nowrap supaya teks membungkus, bukan terpotong. */
+      const stillSpills = lines.some((l) => l.scrollWidth > l.parentElement.clientWidth + 1);
+      if (stillSpills) {
+        lines.forEach((l) => {
+          l.style.whiteSpace = '';
+          l.style.fontSize = '';
         });
       }
     });

@@ -233,7 +233,13 @@ section{position:relative;z-index:1;padding-block:clamp(90px,11vw,150px)}
 #termInput{position:absolute;opacity:0;width:1px;height:1px}
 .term-status{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid var(--line);padding:.55em 1.1em;
   font:500 .6rem var(--fm);letter-spacing:.18em;color:var(--mut)}
-@media(max-width:480px){.term-body{font-size:.7rem}}
+@media(max-width:480px){
+  .term-body{font-size:.7rem}
+  /* di layar sempit, judul window dipotong elipsis — lebih baik
+     dihilangkan supaya tidak terlihat seperti teks rusak */
+  .term-title{display:none}
+  .term-status{font-size:.54rem;letter-spacing:.12em}
+}
 
 /* ================= KARYA ================= */
 .work-list{border-top:1px solid var(--line)}
